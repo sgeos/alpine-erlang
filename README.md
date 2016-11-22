@@ -14,20 +14,20 @@ Dockerfile so that your app runs in a non-elevated context.
 To boot straight to a prompt in the image:
 
 ```
-$ docker run --rm -it --user=root bitwalker/alpine-erlang erl
-Erlang/OTP 18 [erts-7.2.1] [source] [64-bit] [smp:4:4] [async-threads:10] [hipe] [kernel-poll:false] [dtrace]
+$ docker run --rm -it --user=root sgeos/alpine-erlang erl
+Erlang/OTP 19 [erts-8.1.1] [source] [64-bit] [smp:2:2] [async-threads:10] [hipe] [kernel-poll:false]
 
-Eshell V7.2.1  (abort with ^G)
+Eshell V8.1.1 (abort with ^G)
 1>
 BREAK: (a)bort (c)ontinue (p)roc info (i)nfo (l)oaded
-       (v)ersion (k)ill (D)b-tables (d)istribution
+(v)ersion (k)ill (D)b-tables (d)istribution
 a
 ```
 
 Extending for your own application:
 
 ```dockerfile
-FROM bitwalker/alpine-erlang:4.0
+FROM sgeos/alpine-erlang:latest
 
 # Set exposed ports
 EXPOSE 5000

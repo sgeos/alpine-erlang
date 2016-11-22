@@ -34,8 +34,8 @@ RUN \
     # Install Erlang/OTP build deps
     apk add --no-cache --virtual .erlang-build \
       git autoconf build-base perl-dev && \
-    # Shallow clone Erlang/OTP 19.1.5
-    git clone -b OTP-19.0.1 --single-branch --depth 1 https://github.com/erlang/otp.git . && \
+    # Shallow clone Erlang/OTP 19.1.6
+    git clone -b OTP-19.1.6 --single-branch --depth 1 https://github.com/erlang/otp.git . && \
     # Erlang/OTP build env
     export ERL_TOP=/tmp/erlang-build && \
     export PATH=$ERL_TOP/bin:$PATH && \

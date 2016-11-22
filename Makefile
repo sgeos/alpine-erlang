@@ -1,7 +1,7 @@
 .PHONY: help
 
 VERSION ?= `cat VERSION`
-IMAGE_NAME ?= bitwalker/alpine-erlang
+IMAGE_NAME ?= sgeos/alpine-erlang
 
 help:
 	@echo "$(IMAGE_NAME):$(VERSION)"
