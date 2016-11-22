@@ -34,10 +34,15 @@ ENV APP_VERSION 1.0.0
 ENV PORT 5000
 ENV MIX_ENV prod
 
+ADD ${APP_NAME}.tar.gz ./
 # For an Elixir release:
 # ADD rel/${APP_NAME}/releases/${APP_VERSION}/${APP_NAME}.tar.gz ./
-ADD ${APP_NAME}.tar.gz ./
+
+# The above ADD seems to extract the archive.
+# Use the following for a manual extraction.
 # RUN tar -xzvf ${APP_NAME}.tar.gz
+
+# Change the owner of the app to an unprivileged user.
 RUN chown -R default ./
 
 EXPOSE ${PORT}
@@ -59,3 +64,4 @@ docker run --rm -p $PORT:$PORT $IMAGE_NAME
 ## License
 
 MIT
+
