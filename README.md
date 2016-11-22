@@ -13,7 +13,7 @@ Dockerfile so that your app runs in a non-elevated context.
 
 To boot straight to a prompt in the image:
 
-```
+```sh
 $ docker run --rm -it --user=root sgeos/alpine-erlang erl
 Erlang/OTP 19 [erts-8.1.1] [source] [64-bit] [smp:2:2] [async-threads:10] [hipe] [kernel-poll:false]
 
@@ -29,18 +29,31 @@ Extending for your own application:
 ```dockerfile
 FROM sgeos/alpine-erlang:latest
 
-# Set exposed ports
-EXPOSE 5000
-ENV PORT=5000
+ENV APP_NAME app_name
+ENV APP_VERSION 1.0.0
+ENV PORT 5000
+ENV MIX_ENV prod
 
-ENV MIX_ENV=prod
+# For an Elixir release:
+# ADD rel/${APP_NAME}/releases/${APP_VERSION}/${APP_NAME}.tar.gz ./
+ADD ${APP_NAME}.tar.gz ./
+# RUN tar -xzvf ${APP_NAME}.tar.gz
+RUN chown -R default ./
 
-ADD yourapp.tar.gz ./
-RUN tar -xzvf yourapp.tar.gz
+EXPOSE ${PORT}
 
 USER default
 
-CMD ./bin/yourapp foreground
+CMD ./bin/${APP_NAME} foreground
+```
+
+Build and run with:
+
+```sh
+IMAGE_NAME=image_name
+PORT=5000
+docker build -t $IMAGE_NAME .
+docker run --rm -p $PORT:$PORT $IMAGE_NAME
 ```
 
 ## License
