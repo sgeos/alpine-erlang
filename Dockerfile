@@ -6,7 +6,7 @@ MAINTAINER Paul Schoenfelder <paulschoenfelder@gmail.com>
 # is updated with the current date. It will force refresh of all
 # of the base images and things like `apt-get update` won't be using
 # old cached versions when the Dockerfile is built.
-ENV REFRESHED_AT=2016-11-01 \
+ENV REFRESHED_AT=2016-12-05 \
     LANG=en_US.UTF-8 \
     HOME=/opt/app/ \
     # Set this so that CTRL+G works properly
@@ -35,7 +35,7 @@ RUN \
     apk add --no-cache --virtual .erlang-build \
       git autoconf build-base perl-dev && \
     # Shallow clone Erlang/OTP 19.1.6
-    git clone -b OTP-19.1.6 --single-branch --depth 1 https://github.com/erlang/otp.git . && \
+    git clone -b OTP-19.1.6 --depth 1 https://github.com/erlang/otp.git . && \
     # Erlang/OTP build env
     export ERL_TOP=/tmp/erlang-build && \
     export PATH=$ERL_TOP/bin:$PATH && \
